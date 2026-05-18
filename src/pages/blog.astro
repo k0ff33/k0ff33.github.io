@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 import Post from "../components/Post.astro";
 import ColorScript from "../components/ColorScript.astro";
 
-import { title, subtitle } from "../settings/settings.json"
+import { title, subtitle } from "../settings/settings.json";
 
 let posts = await getCollection("posts");
 
@@ -30,16 +30,14 @@ posts = posts.sort(
 							({
 								url,
 								data: { description, slug, title, tags, added: date },
-							}) => <Post {description} {date} {slug} {title} {tags} />
+							}) => <Post {description} {date} {slug} {title} {tags} />,
 						)
 					}
 				</ul>
 			</content>
 
 			<p class="center">
-				You can also <a href="https://blahg.netlify.app/rss.xml">
-					subscribe with RSS!
-				</a>
+				You can also <a href="/rss.xml">subscribe with RSS</a>.
 			</p>
 		</main>
 		<Footer />

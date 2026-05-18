@@ -6,8 +6,8 @@ import Footer from "../components/Footer.astro";
 import HomePosts from "../components/HomePosts.astro";
 import ColorScript from "../components/ColorScript.astro";
 import Tags from "../components/Tags.astro";
-import { title, subtitle } from "../settings/settings.json"
-import { Content as About } from "./about.md";
+import About from "../components/About.astro";
+import { title, subtitle } from "../settings/settings.json";
 import getTags from "../scripts/getTags";
 
 const posts = await getCollection("posts");
@@ -16,28 +16,26 @@ const tags = getTags(posts);
 
 <!doctype html>
 <html lang="en-us">
-	<BaseHead title={title} description={subtitle} />
-	<body>
-		<Header title={title} />
-		<main>
-			<About />
+  <BaseHead title={title} description={subtitle} />
+  <body>
+    <Header title={title} />
+    <main>
+      <About />
 
-			<br />
+      <br />
 
-			<h3>Here's my most recent posts</h3>
+      <h3>Recent posts</h3>
 
-			<HomePosts allPosts={posts} />
+      <HomePosts allPosts={posts} />
 
-			<p class="center">
-				You can also <a href="https://blahg.netlify.app/rss.xml">
-					subscribe with RSS!
-				</a>
-			</p>
-			<br />
+      <p class="center">
+        You can also <a href="/rss.xml">subscribe with RSS</a>.
+      </p>
+      <br />
 
-			<Tags tags={tags} all />
-		</main>
-		<Footer />
-		<ColorScript />
-	</body>
+      <Tags tags={tags} all />
+    </main>
+    <Footer />
+    <ColorScript />
+  </body>
 </html>

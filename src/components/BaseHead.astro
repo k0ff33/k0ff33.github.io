@@ -2,7 +2,7 @@
 import "../style/fonts.css";
 import "../style/global.css";
 
-import { title as SITE_TITLE } from "../settings/settings.json"
+import { title as SITE_TITLE } from "../settings/settings.json";
 
 const { title, description, image = "/home-blog-card.png" } = Astro.props;
 ---
@@ -31,7 +31,7 @@ const { title, description, image = "/home-blog-card.png" } = Astro.props;
 	<meta property="twitter:url" content={Astro.url} />
 	<meta property="twitter:title" content={title} />
 	<meta property="twitter:description" content={description} />
-	<meta name="twitter:creator" content="" />
+	<meta name="twitter:creator" content="@kamilwojtczyk" />
 	<meta name="twitter:image" content={new URL(image, Astro.url)} />
 
 	<!-- RSS Link -->

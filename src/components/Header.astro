@@ -1,24 +1,80 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { title, subtitle } from "../settings/settings.json"
-
+import { title, subtitle } from "../settings/settings.json";
 ---
 
 <header>
-	<div class="header-section">
-		<div class="header-frame">
-			<h1>{title}</h1>
-			<h2>{subtitle}</h2>
-		</div>
-	</div>
+  <div class="header-section">
+    <div class="header-frame">
+      <div class="header-title">
+        <span class="avatar-frame" aria-hidden="true">
+          <img
+            class="avatar"
+            src="https://github.com/k0ff33.png"
+            alt=""
+            width="72"
+            height="72"
+            decoding="async"
+          />
+        </span>
+        <h1>{title}</h1>
+      </div>
+      <h2>{subtitle}</h2>
+    </div>
+  </div>
 </header>
 <nav>
-	<HeaderLink href="/">home</HeaderLink>
-	<HeaderLink href="/posts">posts</HeaderLink>
-	<HeaderLink href="https://cassidoo.co/newsletter">etc</HeaderLink>
+  <HeaderLink href="/">home</HeaderLink>
+  <HeaderLink href="/blog">blog</HeaderLink>
+  <HeaderLink href="https://github.com/k0ff33">github</HeaderLink>
+  <HeaderLink href="https://www.linkedin.com/in/kwojtczyk">linkedin</HeaderLink>
 </nav>
 <style>
-	h2 {
-		margin: 0.5em 0;
-	}
+  .header-frame {
+    width: min(100%, 560px);
+  }
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .avatar-frame {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 auto;
+    border-radius: 9999px;
+    clip-path: circle(50% at 50% 50%);
+    overflow: hidden;
+  }
+
+  .avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  h1 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  h2 {
+    margin: 0.5em 0;
+    text-align: center;
+  }
+
+  @media (max-width: 420px) {
+    .header-title {
+      gap: 12px;
+    }
+
+    .avatar-frame {
+      width: 56px;
+      height: 56px;
+    }
+  }
 </style>
