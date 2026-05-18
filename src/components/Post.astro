@@ -1,12 +1,21 @@
 ---
-const { slug, title, tags, description, date } = Astro.props;
+interface Props {
+	slug: string;
+	title: string;
+	tags?: string[];
+	description?: string;
+	date: string | Date;
+}
+
+const { slug, title, tags = [], description, date } = Astro.props;
+const postDate = new Date(date);
 ---
 
 <li class="post">
   <a href={`/blog/${slug}/`} class="title">{title}</a>
-  <time datetime={date}>
+  <time datetime={postDate.toISOString()}>
     {
-      new Date(date).toLocaleDateString("en-us", {
+      postDate.toLocaleDateString("en-us", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -17,12 +26,11 @@ const { slug, title, tags, description, date } = Astro.props;
   {description && <span class="excerpt">{description}</span>}
   <div>
     {
-      tags &&
-        tags.map((tag) => (
-          <a class="tag" href={`/tag/${tag}`}>
-            #{tag}
-          </a>
-        ))
+      tags.map((tag) => (
+        <a class="tag" href={`/tag/${tag}`}>
+          #{tag}
+        </a>
+      ))
     }
   </div>
 </li>

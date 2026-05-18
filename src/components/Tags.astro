@@ -1,18 +1,22 @@
 ---
-const { tags, all } = Astro.props;
+interface Props {
+	tags?: string[];
+	all?: boolean;
+}
+
+const { tags = [], all = false } = Astro.props;
 ---
 
 {all && <h3 class="tag-title">View posts by tag</h3>}
-<div class=`${all && "tags"}`>
+<div class={all ? "tags" : undefined}>
 	{
-		tags &&
-			tags.map((tag) => (
-				<>
-					<a class="tag" href={`/tag/${tag}`}>
-						#{tag}
-					</a>
-					{` `}
-				</>
-			))
+		tags.map((tag) => (
+			<>
+				<a class="tag" href={`/tag/${tag}`}>
+					#{tag}
+				</a>
+				{` `}
+			</>
+		))
 	}
 </div>

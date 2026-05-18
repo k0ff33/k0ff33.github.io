@@ -1,11 +1,18 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import Post from "../components/Post.astro";
+
+type PostEntry = CollectionEntry<"posts">;
+
+interface Props {
+	allPosts: PostEntry[];
+}
 
 const { allPosts } = Astro.props;
 
 //.sort(() => 0.5 - Math.random()).slice(0, 3);
 
-let posts = allPosts
+const posts = [...allPosts]
 	.sort(
 		(a, b) =>
 			new Date(b.data.updated || b.data.added).valueOf() -
@@ -19,9 +26,8 @@ let posts = allPosts
 		{
 			posts.map(
 				({
-					url,
 					data: { description, slug, title, tags, added: date },
-				}) => <Post {url} {description} {date} {slug} {title} {tags} />
+				}) => <Post {description} {date} {slug} {title} {tags} />
 			)
 		}
 	</ul>

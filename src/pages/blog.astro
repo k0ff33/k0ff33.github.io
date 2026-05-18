@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -8,10 +9,10 @@ import ColorScript from "../components/ColorScript.astro";
 
 import { title, subtitle } from "../settings/settings.json";
 
-let posts = await getCollection("posts");
+type PostEntry = CollectionEntry<"posts">;
 
-posts = posts.sort(
-	(a, b) =>
+const posts = ((await getCollection("posts")) as PostEntry[]).sort(
+	(a: PostEntry, b: PostEntry) =>
 		new Date(b.data.updated || b.data.added).valueOf() -
 		new Date(a.data.updated || a.data.added).valueOf(),
 );
@@ -28,7 +29,6 @@ posts = posts.sort(
 					{
 						posts.map(
 							({
-								url,
 								data: { description, slug, title, tags, added: date },
 							}) => <Post {description} {date} {slug} {title} {tags} />,
 						)

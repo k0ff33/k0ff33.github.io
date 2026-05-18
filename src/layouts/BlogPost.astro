@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -10,11 +11,17 @@ import getTags from "../scripts/getTags";
 const posts = await getCollection("posts");
 const allTags = getTags(posts);
 
-let {
+type PostData = CollectionEntry<"posts">["data"];
+
+interface Props {
+	content: PostData;
+}
+
+const {
 	content: { title, description, added, updated, tags, heroImage },
 } = Astro.props;
 
-added = new Date(added).toLocaleDateString(
+const addedDate = new Date(added).toLocaleDateString(
 	"en-us",
 	{
 		year: "numeric",
@@ -23,16 +30,16 @@ added = new Date(added).toLocaleDateString(
 	}
 );
 
-if (updated) {
-	updated = new Date(updated).toLocaleDateString(
+const updatedDate = updated
+	? new Date(updated).toLocaleDateString(
 		"en-us",
 		{
 			year: "numeric",
 			month: "short",
 			day: "numeric",
 		}
-	);
-}
+	)
+	: undefined;
 ---
 
 <html lang="en-us">
@@ -44,10 +51,10 @@ if (updated) {
 			<article>
 				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 				<h1 class="article-title">{title}</h1>
-				{updated ?
-					<span><time>{added}</time>, last updated on <time>{updated}</time></span>
+				{updatedDate ?
+					<span><time>{addedDate}</time>, last updated on <time>{updatedDate}</time></span>
 					:
-					<span>{added && <time>{added}</time>}</span>
+					<span>{addedDate && <time>{addedDate}</time>}</span>
 				}
 				<Tags tags={tags} />
 				<hr />
