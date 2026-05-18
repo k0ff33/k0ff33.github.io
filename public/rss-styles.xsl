@@ -170,7 +170,7 @@ This file is in BETA. Please test and contribute to the discussion:
 
 							Web Feed Preview
 						</h1>
-						<h2><xsl:value-of select="/rss/channel/title"/></h2> <!-- This comes from settings.json and can be edited in Tina -->
+						<h2><xsl:value-of select="/rss/channel/title"/></h2> <!-- This comes from settings.json -->
 						<p><xsl:value-of select="/rss/channel/description"/></p> <!-- This too -->
 						<a class="head_link" target="_blank">
 							<xsl:attribute name="href">
